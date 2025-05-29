@@ -22,12 +22,18 @@ This Python script creates a console-based chat application that:
 
 ### Setup
 
-1. **Install dependencies**
+2. **Clone Repository0**
+   ```
+   git clone https://github.com/lokeshpanthangi/gemini-multi-turn-chat.git
+   cd gemini-multi-turn-chat
+   ```
+   
+2. **Install dependencies**
    ```
    pip install google-generativeai python-dotenv
    ```
 
-2. **Set up your API key**
+3. **Set up your API key**
    - Get a Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
    - Create a `.env` file in the same directory as the script with the following content:
      ```
