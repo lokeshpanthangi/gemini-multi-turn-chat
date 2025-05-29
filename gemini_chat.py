@@ -6,7 +6,6 @@ A simple console-based chatbot using Google's Gemini API.
 
 import os
 import sys
-import subprocess
 from dotenv import load_dotenv
 import google.generativeai as genai
 
@@ -50,7 +49,7 @@ def create_chat_session(temperature):
     return model.start_chat(history=[])
 
 def main():
-    """Main function to run the Gemini chatbot."""
+    """Main function to run the Gemini chatbot with exactly two turns by default."""
     print("Welcome to the Gemini Console Chatbot!")
     print("--------------------------------------")
     
@@ -63,44 +62,40 @@ def main():
     # Create a chat session
     chat = create_chat_session(temperature)
     
-    print("\nChat started! Type 'bye' to exit.")
+    print("\nChat started! Context will be preserved between messages.")
     print("--------------------------------------")
     
-    # Main chat loop
-    while True:
-        # Get user input
-        user_input = input("\nYou: ")
-        
-        # Check if user wants to exit
-        if user_input.lower() in ["bye", "exit", "quit"]:
-            print("\nGoodbye! Thanks for chatting.")
-            break
-        
-        try:
-            # Send user input to Gemini and get response
-            response = chat.send_message(user_input)
-            
-            # Print Gemini's response
-            print(f"\nGemini: {response.text}")
-        except Exception as e:
-            print(f"\nError: {str(e)}")
-            print("Please try again or type 'bye' to exit.")
-
-def launch_in_new_terminal():
-    """Launch the chatbot in a new terminal window."""
-    # Get the full path to the current script
-    script_path = os.path.abspath(__file__)
+    # First turn
+    first_input = input("\nEnter your first message: ")
     
-    # Command to open a new terminal and run the script with a special flag
-    # to prevent infinite recursion
-    if len(sys.argv) > 1 and sys.argv[1] == "--in-terminal":
-        # We're already in the new terminal, run the main function
-        main()
-    else:
-        # Launch a new terminal with the script
-        subprocess.Popen(["start", "cmd", "/k", "python", script_path, "--in-terminal"], 
-                         shell=True, 
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+    try:
+        # Send first input to Gemini and get response
+        first_response = chat.send_message(first_input)
+        print(f"\nGemini: {first_response.text}")
+        
+        # Second turn
+        second_input = input("\nEnter your second message (follow-up or additional detail): ")
+        
+        # Send second input to Gemini (context is automatically preserved)
+        second_response = chat.send_message(second_input)
+        print("\nFinal response from Gemini:")
+        print(f"{second_response.text}")
+        
+        # Bonus feature: Ask if the user wants to continue the conversation
+        continue_chat = input("\nWould you like to continue the conversation? (yes/no): ").lower()
+        
+        # Continue conversation if requested (bonus feature)
+        while continue_chat in ["yes", "y"]:
+            next_input = input("\nEnter your next message: ")
+            response = chat.send_message(next_input)
+            print(f"\nGemini: {response.text}")
+            continue_chat = input("\nWould you like to continue the conversation? (yes/no): ").lower()
+        
+        print("\nConversation ended. Thank you for using Gemini Console Chatbot!")
+        
+    except Exception as e:
+        print(f"\nError: {str(e)}")
+        print("Please try again.")
 
 if __name__ == "__main__":
-    launch_in_new_terminal()
+    main()
