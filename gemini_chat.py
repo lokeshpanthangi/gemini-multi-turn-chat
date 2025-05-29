@@ -78,20 +78,20 @@ def main():
         
         # Send second input to Gemini (context is automatically preserved)
         second_response = chat.send_message(second_input)
-        print("\nFinal response from Gemini:")
-        print(f"{second_response.text}")
+        print(f"\nGemini: {second_response.text}")
         
-        # Bonus feature: Ask if the user wants to continue the conversation
-        continue_chat = input("\nWould you like to continue the conversation? (yes/no): ").lower()
-        
-        # Continue conversation if requested (bonus feature)
-        while continue_chat in ["yes", "y"]:
-            next_input = input("\nEnter your next message: ")
+        # Continue conversation by default until user types 'bye'
+        while True:
+            next_input = input("\nYou: ")
+            
+            # Exit if user types 'bye'
+            if next_input.lower() == "bye":
+                print("\nConversation ended. Thank you for using Gemini Console Chatbot!")
+                break
+                
+            # Otherwise continue the conversation
             response = chat.send_message(next_input)
             print(f"\nGemini: {response.text}")
-            continue_chat = input("\nWould you like to continue the conversation? (yes/no): ").lower()
-        
-        print("\nConversation ended. Thank you for using Gemini Console Chatbot!")
         
     except Exception as e:
         print(f"\nError: {str(e)}")

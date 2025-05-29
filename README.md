@@ -49,8 +49,8 @@ This Python script creates a console-based chat application that:
    - Enter your first message
    - View Gemini's response
    - Enter your second message (follow-up or additional detail)
-   - View the final response
-   - Optionally continue the conversation for more turns
+   - Continue the conversation naturally
+   - Type 'bye' when you want to exit
 
 ## 🔒 Security Note
 
@@ -99,8 +99,7 @@ Gemini: Python has several key features that make it popular among developers:
 
 Enter your second message (follow-up or additional detail): Which of these features make it good for data science specifically?
 
-Final response from Gemini:
-Python excels in data science due to several of its features:
+Gemini: Python excels in data science due to several of its features:
 
 1. **Rich Ecosystem of Libraries**: Python offers specialized libraries like NumPy (for numerical computing), pandas (for data manipulation), Matplotlib and Seaborn (for visualization), scikit-learn (for machine learning), and TensorFlow/PyTorch (for deep learning).
 
@@ -122,7 +121,30 @@ Python excels in data science due to several of its features:
 
 10. **Free and Open Source**: Accessibility to everyone, including students, researchers, and organizations of all sizes.
 
-These features combine to create an environment where data scientists can efficiently explore, analyze, and model data while collaborating effectively with others.
+You: Can you recommend some good Python libraries for beginners in data science?
 
-Would you like to continue the conversation? (yes/no):
+Gemini: Absolutely! For beginners in data science with Python, I recommend starting with these libraries:
+
+1. **pandas**: Essential for data manipulation and analysis. It provides data structures like DataFrames that make working with structured data intuitive.
+
+2. **NumPy**: The foundation for numerical computing in Python. It provides efficient array operations and mathematical functions.
+
+3. **Matplotlib**: The most basic visualization library. It's great for creating standard plots and understanding visualization fundamentals.
+
+4. **Seaborn**: Built on Matplotlib but provides a higher-level interface for creating attractive statistical graphics with less code.
+
+5. **scikit-learn**: Perfect for beginners in machine learning. It has consistent APIs, good documentation, and implements many common algorithms.
+
+6. **Jupyter Notebooks**: Not a library per se, but an interactive environment that's excellent for learning and experimenting with code.
+
+Start with simple projects like:
+- Data cleaning and exploration with pandas
+- Basic visualizations with Matplotlib/Seaborn
+- Simple predictive models with scikit-learn
+
+As you grow more comfortable, you can explore more specialized libraries like TensorFlow or PyTorch for deep learning, or Plotly for interactive visualizations.
+
+You: bye
+
+Conversation ended. Thank you for using Gemini Console Chatbot!
 ```
